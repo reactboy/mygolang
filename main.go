@@ -43,7 +43,7 @@ func main() {
 	// rune := 'G'
 	// println(rune)
 	// // Go では変数の宣言時初期化しなかった場合の規定値が全てのデータ型に存在する
-	// // int 0 
+	// // int 0
 	// // float +0.000000e+000
 	// // bool false
 	// // string 空の値("")
@@ -56,4 +56,23 @@ func main() {
 	// // Go でコマンドライン引数を受け取るには osパッケージとos.Argsを使用する
 	// // number1, _ := strconv.Atoi(os.Args[1])
 	// // println(number1)
+
+	// go は他の言語と違いでifの条件文の()を省略できる
+	// go では3項演算子を使えない 毎回完全なif文を書く必要がある
+	x := 27
+	if x%2 == 0 {
+		println(x, "is even")
+	}
+	// if文内でのみ使用できる変数を宣言できる。また条件式としても使用することが可能
+	if num := givemenumber(); num < 0 {
+		println(num, "is negative")
+	} else if num < 10 {
+		println(num, "has only one digit")
+	} else {
+		println(num, "has multiple digits")
+	}
+}
+
+func givemenumber() int {
+	return -1
 }
