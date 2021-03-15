@@ -3,6 +3,12 @@
 // packageとは一般的なソースコードファイルのセット。
 package main
 
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
 // importステートメントを利用することで別のパッケージ内に配置されている他のコードからプログラムにアクセスできるよになる。
 // この場合はmainパッケージからfmtパッケージにアクセスできるようになっている
 
@@ -59,20 +65,57 @@ func main() {
 
 	// go は他の言語と違いでifの条件文の()を省略できる
 	// go では3項演算子を使えない 毎回完全なif文を書く必要がある
-	x := 27
-	if x%2 == 0 {
-		println(x, "is even")
+	// x := 27
+	// if x%2 == 0 {
+	// 	println(x, "is even")
+	// }
+	// // if文内でのみ使用できる変数を宣言できる。また条件式としても使用することが可能
+	// if num := givemenumber(); num < 0 {
+	// 	println(num, "is negative")
+	// } else if num < 10 {
+	// 	println(num, "has only one digit")
+	// } else {
+	// 	println(num, "has multiple digits")
+	// }
+
+	// switch文の基本形
+	sec := time.Now().Unix()
+	rand.Seed(sec)
+	i := rand.Int31n(10)
+
+	switch i {
+	case 0:
+		fmt.Print("zero...")
+	case 1:
+		fmt.Print("one...")
+	case 2:
+		fmt.Print("tow...")
+	default:
+		fmt.Print("no match...")
 	}
-	// if文内でのみ使用できる変数を宣言できる。また条件式としても使用することが可能
-	if num := givemenumber(); num < 0 {
-		println(num, "is negative")
-	} else if num < 10 {
-		println(num, "has only one digit")
-	} else {
-		println(num, "has multiple digits")
-	}
+	println("ok")
+	region, continent := location("Irvine")
+
+	println("I work in ", region, continent)
 }
 
-func givemenumber() int {
-	return -1
+// func givemenumber() int {
+// 	return -1
+// }
+
+func location(city string) (string, string) {
+	var region string
+	var continent string
+	switch city {
+	// いずれかに一致するのような書き方も可能
+	case "Delhi", "Hyderbad", "Mumbai":
+		region, continent = "India", "Asia"
+	case "Irvine", "Los Angeles", "San Diego":
+		region, continent = "Calfornia", "USA"
+	default:
+		region, continent = "Unknown", "Unknown"
+	}
+
+	return region, continent
+
 }
