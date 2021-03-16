@@ -79,43 +79,58 @@ func main() {
 	// }
 
 	// switch文の基本形
-	sec := time.Now().Unix()
-	rand.Seed(sec)
-	i := rand.Int31n(10)
+	// sec := time.Now().Unix()
+	// rand.Seed(sec)
+	// i := rand.Int31n(10)
 
-	switch i {
-	case 0:
-		fmt.Print("zero...")
-	case 1:
-		fmt.Print("one...")
-	case 2:
-		fmt.Print("tow...")
-	default:
-		fmt.Print("no match...")
+	// switch i {
+	// case 0:
+	// 	fmt.Print("zero...")
+	// case 1:
+	// 	fmt.Print("one...")
+	// case 2:
+	// 	fmt.Print("tow...")
+	// default:
+	// 	fmt.Print("no match...")
+	// }
+	// println("ok")
+	// region, continent := location("Irvine")
+
+	// println("I work in ", region, continent)
+	// go でのfor文の基本形
+	sum := 0
+	for i := 1; i <= 100; i++ {
+		sum += i
 	}
-	println("ok")
-	region, continent := location("Irvine")
+	fmt.Println("sum of 1...100 is", sum)
 
-	println("I work in ", region, continent)
+	var num int64
+	rand.Seed(time.Now().Unix())
+	// go には他の言語でいうwhile文と同等のものがない.forを使って同じことができる
+	for num != 5 {
+		num = rand.Int63n(15)
+		fmt.Println(num)
+	}
+
 }
 
 // func givemenumber() int {
 // 	return -1
 // }
 
-func location(city string) (string, string) {
-	var region string
-	var continent string
-	switch city {
-	// いずれかに一致するのような書き方も可能
-	case "Delhi", "Hyderbad", "Mumbai":
-		region, continent = "India", "Asia"
-	case "Irvine", "Los Angeles", "San Diego":
-		region, continent = "Calfornia", "USA"
-	default:
-		region, continent = "Unknown", "Unknown"
-	}
+// func location(city string) (string, string) {
+// 	var region string
+// 	var continent string
+// 	switch city {
+// 	// いずれかに一致するのような書き方も可能
+// 	case "Delhi", "Hyderbad", "Mumbai":
+// 		region, continent = "India", "Asia"
+// 	case "Irvine", "Los Angeles", "San Diego":
+// 		region, continent = "Calfornia", "USA"
+// 	default:
+// 		region, continent = "Unknown", "Unknown"
+// 	}
 
-	return region, continent
+// 	return region, continent
 
-}
+// }
