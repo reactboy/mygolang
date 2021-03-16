@@ -121,6 +121,7 @@ func main() {
 	// 	}
 	// }()
 	// panicloop()
+	fizzbuzz();
 }
 
 // func panicloop() {
@@ -142,6 +143,21 @@ func main() {
 // func givemenumber() int {
 // 	return -1
 // }
+
+func fizzbuzz () {
+	count := 0
+	for count <= 100 {
+		switch {
+		case count % 3 == 0 && count % 5 == 0:
+			println(count, "FizzBuzz");
+		case count % 3 == 0:
+			println(count,"Fizz" )
+		case count % 5 == 0:
+			println(count, "Buzz" )
+		}
+		count++
+	}
+}
 
 // func location(city string) (string, string) {
 // 	var region string
