@@ -3,10 +3,6 @@
 // packageとは一般的なソースコードファイルのセット。
 package main
 
-import (
-	"fmt"
-)
-
 // importステートメントを利用することで別のパッケージ内に配置されている他のコードからプログラムにアクセスできるよになる。
 // この場合はmainパッケージからfmtパッケージにアクセスできるようになっている
 
@@ -110,37 +106,38 @@ func main() {
 	// 	fmt.Println(num)
 	// }
 
-	for i := 1; i <= 4; i++ {
-		// go ではdeferを使用することで実行を遅延できる.使い所がいまいちわからない
-		// 最後に実行させたい場合に使うのかな
-		defer fmt.Println("deferred", -i)
-		fmt.Println("regular", i)
-	}
-	defer func() {
-		// recoverはdeferされた関数で呼び出すことができるもの
-		// プログラムがpanicになっていない場合はnilを返すがpanicになっている場合はnilを返さない
-		// panicになった際に処理をしたい場合に使う?
-		if r := recover(); r != nil {
-			println("Recoverd in main", r)
-		}
-	}()
-	panicloop()
+	// for i := 1; i <= 4; i++ {
+	// 	// go ではdeferを使用することで実行を遅延できる.使い所がいまいちわからない
+	// 	// 最後に実行させたい場合に使うのかな
+	// 	defer fmt.Println("deferred", -i)
+	// 	fmt.Println("regular", i)
+	// }
+	// defer func() {
+	// 	// recoverはdeferされた関数で呼び出すことができるもの
+	// 	// プログラムがpanicになっていない場合はnilを返すがpanicになっている場合はnilを返さない
+	// 	// panicになった際に処理をしたい場合に使う?
+	// 	if r := recover(); r != nil {
+	// 		println("Recoverd in main", r)
+	// 	}
+	// }()
+	// panicloop()
 }
-func panicloop() {
 
-	panicCount := 0
-	for panicCount < 10 {
-		if panicCount > 4 {
-			println("panicking!")
-			// go ではpanicを使用すると処理を止めれる
-			panic("Panic in for loop")
-		}
-		// panicで処理が止まったとしても処理が中断される前にdifferで遅延させた処理が実行される
-		defer println("defer in for loop", panicCount)
-		println("printing in for loop", panicCount)
-		panicCount = panicCount + 1
-	}
-}
+// func panicloop() {
+
+// 	panicCount := 0
+// 	for panicCount < 10 {
+// 		if panicCount > 4 {
+// 			println("panicking!")
+// 			// go ではpanicを使用すると処理を止めれる
+// 			panic("Panic in for loop")
+// 		}
+// 		// panicで処理が止まったとしても処理が中断される前にdifferで遅延させた処理が実行される
+// 		defer println("defer in for loop", panicCount)
+// 		println("printing in for loop", panicCount)
+// 		panicCount = panicCount + 1
+// 	}
+// }
 
 // func givemenumber() int {
 // 	return -1
