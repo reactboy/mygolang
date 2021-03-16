@@ -5,8 +5,6 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
-	"time"
 )
 
 // importステートメントを利用することで別のパッケージ内に配置されている他のコードからプログラムにアクセスできるよになる。
@@ -98,20 +96,50 @@ func main() {
 
 	// println("I work in ", region, continent)
 	// go でのfor文の基本形
-	sum := 0
-	for i := 1; i <= 100; i++ {
-		sum += i
-	}
-	fmt.Println("sum of 1...100 is", sum)
+	// sum := 0
+	// for i := 1; i <= 100; i++ {
+	// 	sum += i
+	// }
+	// fmt.Println("sum of 1...100 is", sum)
 
-	var num int64
-	rand.Seed(time.Now().Unix())
-	// go には他の言語でいうwhile文と同等のものがない.forを使って同じことができる
-	for num != 5 {
-		num = rand.Int63n(15)
-		fmt.Println(num)
-	}
+	// var num int64
+	// rand.Seed(time.Now().Unix())
+	// // go には他の言語でいうwhile文と同等のものがない.forを使って同じことができる
+	// for num != 5 {
+	// 	num = rand.Int63n(15)
+	// 	fmt.Println(num)
+	// }
 
+	for i := 1; i <= 4; i++ {
+		// go ではdeferを使用することで実行を遅延できる.使い所がいまいちわからない
+		// 最後に実行させたい場合に使うのかな
+		defer fmt.Println("deferred", -i)
+		fmt.Println("regular", i)
+	}
+	defer func() {
+		// recoverはdeferされた関数で呼び出すことができるもの
+		// プログラムがpanicになっていない場合はnilを返すがpanicになっている場合はnilを返さない
+		// panicになった際に処理をしたい場合に使う?
+		if r := recover(); r != nil {
+			println("Recoverd in main", r)
+		}
+	}()
+	panicloop()
+}
+func panicloop() {
+
+	panicCount := 0
+	for panicCount < 10 {
+		if panicCount > 4 {
+			println("panicking!")
+			// go ではpanicを使用すると処理を止めれる
+			panic("Panic in for loop")
+		}
+		// panicで処理が止まったとしても処理が中断される前にdifferで遅延させた処理が実行される
+		defer println("defer in for loop", panicCount)
+		println("printing in for loop", panicCount)
+		panicCount = panicCount + 1
+	}
 }
 
 // func givemenumber() int {
