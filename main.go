@@ -3,6 +3,8 @@
 // packageとは一般的なソースコードファイルのセット。
 package main
 
+import "fmt"
+
 // importステートメントを利用することで別のパッケージ内に配置されている他のコードからプログラムにアクセスできるよになる。
 // この場合はmainパッケージからfmtパッケージにアクセスできるようになっている
 
@@ -121,7 +123,10 @@ func main() {
 	// 	}
 	// }()
 	// panicloop()
-	fizzbuzz();
+	fizzbuzz()
+	// guessroot(25)
+	sqrt(25)
+	panicnegative()
 }
 
 // func panicloop() {
@@ -144,18 +149,65 @@ func main() {
 // 	return -1
 // }
 
-func fizzbuzz () {
+func fizzbuzz() {
 	count := 0
 	for count <= 100 {
 		switch {
-		case count % 3 == 0 && count % 5 == 0:
-			println(count, "FizzBuzz");
-		case count % 3 == 0:
-			println(count,"Fizz" )
-		case count % 5 == 0:
-			println(count, "Buzz" )
+		case count%3 == 0 && count%5 == 0:
+			println(count, "FizzBuzz")
+		case count%3 == 0:
+			println(count, "Fizz")
+		case count%5 == 0:
+			println(count, "Buzz")
 		}
 		count++
+	}
+}
+
+// func guessroot (x int) {
+// sroot := 1
+// res := sroot - (sroot -x) / (2 * sroot)
+// println("first res", res)
+// sroot = res
+//  for res == sroot {
+// 	println("A guess for square root is ", sroot);
+// 	res = sroot - (sroot -x) / (2 * sroot)
+// 	println("for res", res)
+// 	sroot = res
+// }
+// println(res == sroot)
+// println("Square root is:", sroot);
+// }
+
+func sqrt(num float64) float64 {
+	currguess := 1.0
+	prevguess := 1.0
+	for count := 1; count <= 10; count++ {
+		prevguess = currguess
+		currguess = prevguess - (prevguess*prevguess-num)/(2*prevguess)
+		if currguess == prevguess {
+			break
+		}
+		fmt.Println("A guess for square root is", currguess)
+	}
+	return currguess
+}
+
+func panicnegative() {
+	val := 0
+	for {
+		fmt.Println("Enter number: ")
+		fmt.Scanf("%d", &val)
+		switch {
+
+		case val < 0:
+			panic("You entered a negative number!")
+		case val == 0:
+			fmt.Println("0 is neither negative nor positive")
+		default:
+			fmt.Println("You entered:", val)
+
+		}
 	}
 }
 
