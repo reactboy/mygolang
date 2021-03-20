@@ -17,5 +17,9 @@ func main() {
 	// 要素数5のstringの配列を作成している
 	// 初期化時に必ずしも要素数の数ぶん値を設定する必要はない
 	cities := [5]string{"New York", "Paris", "Berlin", "Madrid",}
-	println(cities)
+	fmt.Println(cities)
+	//配列の初期化時に長さを指定しないで宣言。以下は99番目に要素を指定するから自動的にlengthが100の配列が宣言される
+	numbers := [...]int{99: -1}
+	println("First Position", numbers[0]);
+	println("Last Position", numbers[99]);
 }
